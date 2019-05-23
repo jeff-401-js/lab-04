@@ -23,5 +23,29 @@ let fileFunc = (arr) => {
 };
 
 fileFunc(code);
-console.log(turnsky);
+// console.log(turnsky);
 
+let stringfyBuffer = (buffer) => {
+  let str = '';
+  for(let char of buffer){
+    str += String.fromCharCode(char);
+  }
+
+  return str;
+};
+
+let fileWriter = () => {
+  
+  fs.readFile('./files/pair-programming.txt', (err, data) => {
+    if(err) throw err;
+    
+    // console.log(stringfyBuffer(data));
+    let newData = stringfyBuffer(data);
+    console.log(newData);
+    fs.writeFile('./files/index.html', newData, (err) => {
+      if(err) throw err;
+    });
+  });
+};
+
+fileWriter();

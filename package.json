@@ -1,0 +1,25 @@
+{
+  "name": "lab-04",
+  "version": "1.0.0",
+  "description": "lab four",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint **/*.js",
+    "test": "jest --coverage --verbose",
+    "test-watch": "jest --watchAll --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeff-401-js/lab-04.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeff-401-js/lab-04/issues"
+  },
+  "homepage": "https://github.com/jeff-401-js/lab-04#readme",
+  "dependencies": {
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0"
+  }
+}

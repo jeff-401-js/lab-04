@@ -5,22 +5,23 @@ const fs = require('fs');
 let test = 'test';
 
 let writer = (bitFile) =>{
-  fs.appendFile('./files/loop.js', bitFile, (err) => {
+  fs.writeFile('./files/loop.js', bitFile, (err) => {
     if(err) throw err;
   });
 };
 
-let buffer = `let names = ['bob', 'jim', 'ted'];\nlet loop = (names) => {  names.forEach((element) => {\n  console.log(element);\n});\n};\nloop(names);`.split('');
+let code = `'use strict';\n\nlet names = ['bob', 'jim', 'ted'];\nlet loop = (names) => {  names.forEach((element) => {\n  console.log(element);\n});\n};\nloop(names);`.split('');
 
 let turnsky = Buffer.from('');
 
+
 let fileFunc = (arr) => {
   arr.forEach((element) => {
-    turnsky += element;
+    turnsky = Buffer.concat([turnsky, Buffer.from(element)]);
   });
   writer(turnsky);
 };
 
-fileFunc(buffer);
+fileFunc(code);
 console.log(turnsky);
 

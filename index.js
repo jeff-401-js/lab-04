@@ -69,16 +69,21 @@ let fileWriter = () => {
     // console.log(arr);
 
     arr.forEach((element) => {
+
       if(element.includes('.')){
-        
+        element = `${li}\n` + element + `\n${liClose}`;
         // element.unshift(h2);
         // element.push(h2Close);
-        let newb = element.split('.');
-        console.log(newb);
-        newb.forEach((element, idx) => {
-          console.log(element + idx);
-          element = '<li>\n ' + element + '\n</li>';
-        });
+        // let newb = element.split('.');
+        // console.log(newb);
+        // newb.forEach((element, idx) => {
+          // console.log(element + idx);
+          // element.unshift(li);
+          // element = `${li}\n` + element + `\n${liClose}`;
+          
+        // });
+        console.log(element);
+        // return element;
       }
     });
     // console.log(arr);

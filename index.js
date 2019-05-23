@@ -35,13 +35,38 @@ let stringfyBuffer = (buffer) => {
 };
 
 let fileWriter = () => {
-  
+  // let article =  Buffer.from('<article>');
+  // let articleClose = Buffer.from('</article>');
+  let article = `<article>`;
+  let articleClose = `</article>`;
+  // console.log(article);
+  // article.split(' ');
+  // console.log(article);
+  let h2 = `<h2>`;
+  let h2Close = `</h2>`;
+  let h3 = `<h3>`;
+  let h3Close = `</h3>`;
+  let li = `<li>`;
+  let liClose = `</li>`;
+
   fs.readFile('./files/pair-programming.txt', (err, data) => {
     if(err) throw err;
+    let bufferArray = [...data];
+    // bufferArray.unshift(article);
+    // bufferArray.push(articleClose);
+    // console.log(bufferArray);
+    // console.log(data);
+    // bufferArray.join('');
+    // console.log(bufferArray);
+    let newData = stringfyBuffer(bufferArray);
+    let type = article + newData;
+    // console.log(type);
+    newData = type + articleClose;
+    // newData += article;
+    // console.log(newData);
     
-    // console.log(stringfyBuffer(data));
-    let newData = stringfyBuffer(data);
-    console.log(newData);
+    
+
     fs.writeFile('./files/index.html', newData, (err) => {
       if(err) throw err;
     });

@@ -64,7 +64,24 @@ let fileWriter = () => {
     newData = type + articleClose;
     // newData += article;
     // console.log(newData);
-    
+    // changer(newData);
+    let arr = newData.split('\n');
+    // console.log(arr);
+
+    arr.forEach((element) => {
+      if(element.includes('.')){
+        
+        // element.unshift(h2);
+        // element.push(h2Close);
+        let newb = element.split('.');
+        console.log(newb);
+        newb.forEach((element, idx) => {
+          console.log(element + idx);
+          element = '<li>\n ' + element + '\n</li>';
+        });
+      }
+    });
+    // console.log(arr);
     
 
     fs.writeFile('./files/index.html', newData, (err) => {
@@ -74,3 +91,11 @@ let fileWriter = () => {
 };
 
 fileWriter();
+
+
+// let changer = (data) => {
+//   let arr = data.split('\n');
+//   console.log(arr);
+//   return arr;
+// };
+

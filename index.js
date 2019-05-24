@@ -44,27 +44,23 @@ let fileWriter = () => {
 
     let newData = stringfyBuffer(data);
     // console.log(newData);
-    // let type = article + h2 + newData;
-    // console.log(type);
-    // newData = type + liClose + articleClose;
-    // newData += article;
-    // console.log(newData);
-    // changer(newData);
     let arr = newData.split('\n\n');
     // console.log(arr);
 
     arr.forEach((element, idx) => {
       newArr.push(arr[idx]);
       console.log(newArr);
-        let newb = element.split('.');
-        // console.log(newb);
-        newb.forEach((element, idx) => {
-          // console.log(element + idx);
-          // element.unshift(li);
-          element = `${li}\n` + element + `\n${liClose}`;
-          
+
+        newArr.forEach((element, index) => {
+
+          if(element.includes(newArr[idx][index][0] + newArr[idx][index][1])){
+            answer.push(`<h3>${newArr[idx][index].split('\n')[0]}</h3>`);
+            answer.push('\n');
+            answer.push(`<li>${newArr[idx][index].split('.')[1]}</li>`);
+            answer.push('\n\n');
+          }
         });
-        return element;
+
       }
     });
     // console.log(arr);

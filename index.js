@@ -35,61 +35,42 @@ let stringfyBuffer = (buffer) => {
 };
 
 let fileWriter = () => {
-  // let article =  Buffer.from('<article>');
-  // let articleClose = Buffer.from('</article>');
-  let article = `<article>`;
-  let articleClose = `</article>`;
-  // console.log(article);
-  // article.split(' ');
-  // console.log(article);
-  let h2 = `<h2>`;
-  let h2Close = `</h2>`;
-  let h3 = `<h3>`;
-  let h3Close = `</h3>`;
-  let li = `<li>`;
-  let liClose = `</li>`;
+
 
   fs.readFile('./files/pair-programming.txt', (err, data) => {
     if(err) throw err;
-    let bufferArray = [...data];
-    // bufferArray.unshift(article);
-    // bufferArray.push(articleClose);
-    // console.log(bufferArray);
-    // console.log(data);
-    // bufferArray.join('');
-    // console.log(bufferArray);
-    let newData = stringfyBuffer(bufferArray);
-    let type = article + newData;
+    let newArr = [];
+    let answer = [];
+
+    let newData = stringfyBuffer(data);
+    // console.log(newData);
+    // let type = article + h2 + newData;
     // console.log(type);
-    newData = type + articleClose;
+    // newData = type + liClose + articleClose;
     // newData += article;
     // console.log(newData);
     // changer(newData);
-    let arr = newData.split('\n');
+    let arr = newData.split('\n\n');
     // console.log(arr);
 
-    arr.forEach((element) => {
-
-      if(element.includes('.')){
-        element = `${li}\n` + element + `\n${liClose}`;
-        // element.unshift(h2);
-        // element.push(h2Close);
-        // let newb = element.split('.');
+    arr.forEach((element, idx) => {
+      newArr.push(arr[idx]);
+      console.log(newArr);
+        let newb = element.split('.');
         // console.log(newb);
-        // newb.forEach((element, idx) => {
+        newb.forEach((element, idx) => {
           // console.log(element + idx);
           // element.unshift(li);
-          // element = `${li}\n` + element + `\n${liClose}`;
+          element = `${li}\n` + element + `\n${liClose}`;
           
-        // });
-        console.log(element);
-        // return element;
+        });
+        return element;
       }
     });
     // console.log(arr);
     
 
-    fs.writeFile('./files/index.html', newData, (err) => {
+    fs.writeFile('./files/index.html', newArr, (err) => {
       if(err) throw err;
     });
   });

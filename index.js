@@ -42,42 +42,32 @@ let fileWriter = () => {
     let newArr = [];
     let answer = [];
 
+
     let newData = stringfyBuffer(data);
     // console.log(newData);
     let arr = newData.split('\n\n');
     // console.log(arr);
 
-    arr.forEach((element, idx) => {
+    arr.forEach((e, idx) => {
       newArr.push(arr[idx]);
       console.log(newArr);
 
-        newArr.forEach((element, index) => {
+      newArr.forEach((element, index) => {
 
-          if(element.includes(newArr[idx][index][0] + newArr[idx][index][1])){
-            answer.push(`<h3>${newArr[idx][index].split('\n')[0]}</h3>`);
-            answer.push('\n');
-            answer.push(`<li>${newArr[idx][index].split('.')[1]}</li>`);
-            answer.push('\n\n');
-          }
-        });
-
-      }
+        if(element.includes(newArr[idx][index][0] + newArr[idx][index][1])){
+          answer.push(`<h3>${newArr[idx][index].split('\n')[0]}</h3>`);
+          answer.push('\n');
+          answer.push(`<li>${newArr[idx][index].split('.')[1]}</li>`);
+          answer.push('\n\n');
+        }
+      });
     });
-    // console.log(arr);
-    
 
-    fs.writeFile('./files/index.html', newArr, (err) => {
+    fs.writeFile('./files/index.html', answer, (err) => {
       if(err) throw err;
     });
   });
 };
 
 fileWriter();
-
-
-// let changer = (data) => {
-//   let arr = data.split('\n');
-//   console.log(arr);
-//   return arr;
-// };
 

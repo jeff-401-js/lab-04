@@ -1,9 +1,9 @@
 'use strict';
 
+module.exports = fileWriter, fileFunc;
+
 const fs = require('fs');
 const reader = require('readline');
-
-// let test = 'test';
 
 let writer = (bitFile) =>{
   fs.writeFile('./files/loop.js', bitFile, (err) => {
@@ -15,16 +15,14 @@ let code = `'use strict';\n\nlet names = ['bob', 'jim', 'ted'];\nlet loop = (nam
 
 let turnsky = Buffer.from('');
 
-
 let fileFunc = (arr) => {
   arr.forEach((element) => {
     turnsky = Buffer.concat([turnsky, Buffer.from(element)]);
   });
   writer(turnsky);
 };
-
 fileFunc(code);
-// console.log(turnsky);
+
 
 // let stringfyBuffer = (buffer) => {
 //   let str = '';
@@ -35,7 +33,6 @@ fileFunc(code);
 //   return str;
 // };
 
-// let buffer;
 let tags = {};
 let answerArray = [];
 

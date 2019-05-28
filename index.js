@@ -3,7 +3,7 @@
 const fs = require('fs');
 const reader = require('readline');
 
-let test = 'test';
+// let test = 'test';
 
 let writer = (bitFile) =>{
   fs.writeFile('./files/loop.js', bitFile, (err) => {
@@ -26,14 +26,14 @@ let fileFunc = (arr) => {
 fileFunc(code);
 // console.log(turnsky);
 
-let stringfyBuffer = (buffer) => {
-  let str = '';
-  for(let char of buffer){
-    str += String.fromCharCode(char);
-  }
+// let stringfyBuffer = (buffer) => {
+//   let str = '';
+//   for(let char of buffer){
+//     str += String.fromCharCode(char);
+//   }
 
-  return str;
-};
+//   return str;
+// };
 
 // let buffer;
 let tags = {};
@@ -48,7 +48,6 @@ let createTag = (tag, buffer) => {
   }
   buffer = Buffer.concat([tags[tag].open, buffer, tags[tag].close]);
   answerArray.push(buffer);
-  console.log(Buffer.from(buffer));
 };
 
 let fileWriter = (file) => {
@@ -81,7 +80,7 @@ let fileWriter = (file) => {
 fileWriter('./files/pair-programming.txt');
 
 
-
+// Demo code
 // class Converter {
 //   constructor(){
 //     this.buffer = Buffer.from('');

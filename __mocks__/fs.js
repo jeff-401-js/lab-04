@@ -1,4 +1,3 @@
-
 'use strict';
 
 module.exports = exports = {};
@@ -10,3 +9,12 @@ exports.readFile = (file, cb) => {
     cb(undefined, Buffer.from('File Contents'));
   }
 };
+
+exports.writeFile = (file) => {
+  if(file.match(/bad/i)){
+    return 'Invalid file';
+  }else{
+    return Buffer.from('File Contents');
+  }
+};
+

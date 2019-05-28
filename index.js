@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = fileWriter, fileFunc;
+
 
 const fs = require('fs');
 const reader = require('readline');
@@ -75,7 +75,7 @@ let fileWriter = (file) => {
 };
 
 fileWriter('./files/pair-programming.txt');
-
+module.exports = fileWriter, fileFunc;
 
 // Demo code
 // class Converter {

@@ -35,6 +35,10 @@ let stringfyBuffer = (buffer) => {
   return str;
 };
 
+// let buffer;
+let tags = {};
+let answerArray = [];
+
 let createTag = (tag, buffer) => {
   if(!tags[tag]){
     tags[tag] = {
@@ -42,10 +46,10 @@ let createTag = (tag, buffer) => {
       close: Buffer.from(`</${tag}>`),
     };
   }
-  this.buffer = Buffer.concat([this.buffer, this.tags[tag].open, buffer, this.tags[tag].close]);
+  buffer = Buffer.concat([tags[tag].open, buffer, tags[tag].close]);
+  answerArray.push(buffer);
+  console.log(Buffer.from(buffer));
 };
-
-let tags = {};
 
 let fileWriter = (file) => {
 
@@ -53,64 +57,72 @@ let fileWriter = (file) => {
     input: fs.createReadStream(file),
   });
 
-  fs.readFile('./files/pair-programming.txt', (err, data) => {
-    if(err) throw err;
-
-
+  lineReader.on('line', function (line) {
+    if(line.match(/^[0-9]\./)) {
+      createTag('h3', Buffer.from(line));
+    }
+    else if (line.match(/\./)){
+      line.split('.').forEach( sentence => {
+        sentence && createTag('li', Buffer.from(sentence));
       });
-    });
-
-    fs.writeFile('./files/index.html', answer, (err) => {
-      if(err) throw err;
+    }
+    else if(line){
+      createTag('h2', Buffer.from(line));
+    }
+  });
+ 
+  lineReader.on('close', () => {
+    fs.writeFile('./files/index.html', answerArray, (err, data) => {
+      console.log('start live-server, file is there!');
     });
   });
 };
 
-fileWriter();
+fileWriter('./files/pair-programming.txt');
 
 
 
-class Converter {
-  constructor(){
-    this.buffer = Buffer.from('');
-    this.tags = {};
-  }
-  createTag(tag, buffer){
-    if(!this.tags[tag]){
-      this.tags[tag] = {
-        open: Buffer.from(`<${tag}>`),
-        close: Buffer.from(`</${tag}>`),
-      };
-    }
-    this.buffer = Buffer.concat([this.buffer, this.tags[tag].open, buffer, this.tags[tag].close]);
-  }
+// class Converter {
+//   constructor(){
+//     this.buffer = Buffer.from('');
+//     this.tags = {};
+//   }
+//   createTag(tag, buffer){
+//     if(!this.tags[tag]){
+//       this.tags[tag] = {
+//         open: Buffer.from(`<${tag}>`),
+//         close: Buffer.from(`</${tag}>`),
+//       };
+//     }
+//     this.buffer = Buffer.concat([this.buffer, this.tags[tag].open, buffer, this.tags[tag].close]);
+//   }
 
-  convert(file) {
-    var lineReader = reader.createInterface({
-      input: fs.createReadStream(file),
-    });
+//   convert(file) {
+//     var lineReader = reader.createInterface({
+//       input: fs.createReadStream(file),
+//     });
 
-    lineReader.on('line', function (line) {
-      if(line.match(/^[0-9]\./)) {
-        this.createTag('h3', Buffer.from(line));
-      }
-      else if (line.match(/\./)){
-        line.split('.').forEach( sentence => {
-          sentence && this.createTag('li', Buffer.from(sentence));
-        });
-      }
-      else if(line){
-        this.createTag('h2', Buffer.from(line));
-      }
-    }.bind(this));
+//     lineReader.on('line', function (line) {
+//       if(line.match(/^[0-9]\./)) {
+//         this.createTag('h3', Buffer.from(line));
+//       }
+//       else if (line.match(/\./)){
+//         line.split('.').forEach( sentence => {
+//           sentence && this.createTag('li', Buffer.from(sentence));
+//         });
+//       }
+//       else if(line){
+//         this.createTag('h2', Buffer.from(line));
+//       }
+//     }.bind(this));
 
-    lineReader.on('close', () => {
-      fs.writeFile('./files/index.html', this.buffer, (err, data) => {
-        console.log('start live-server, file is there!');
-      });
-    });
-  }
-}
+//     lineReader.on('close', () => {
+//       fs.writeFile('./files/index.html', this.buffer, (err, data) => {
+//         console.log('start live-server, file is there!');
+//       });
+//     });
+//   }
+// }
 
-let html = new Converter();
-html.convert('./files/pair-programming.txt');
+// let html = new Converter();
+// html.convert('./files/pair-programming.txt');

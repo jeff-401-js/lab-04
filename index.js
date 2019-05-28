@@ -35,32 +35,28 @@ let stringfyBuffer = (buffer) => {
   return str;
 };
 
-let fileWriter = () => {
+let createTag = (tag, buffer) => {
+  if(!tags[tag]){
+    tags[tag] = {
+      open: Buffer.from(`<${tag}>`),
+      close: Buffer.from(`</${tag}>`),
+    };
+  }
+  this.buffer = Buffer.concat([this.buffer, this.tags[tag].open, buffer, this.tags[tag].close]);
+};
 
+let tags = {};
+
+let fileWriter = (file) => {
+
+  let lineReader = reader.createInterface({
+    input: fs.createReadStream(file),
+  });
 
   fs.readFile('./files/pair-programming.txt', (err, data) => {
     if(err) throw err;
-    let newArr = [];
-    let answer = [];
 
 
-    let newData = stringfyBuffer(data);
-    // console.log(newData);
-    let arr = newData.split('\n\n');
-    // console.log(arr);
-
-    arr.forEach((e, idx) => {
-      newArr.push(arr[idx]);
-      console.log(newArr);
-
-      newArr.forEach((element, index) => {
-
-        if(element.includes(newArr[idx][index][0] + newArr[idx][index][1])){
-          answer.push(`<h3>${newArr[idx][index].split('\n')[0]}</h3>`);
-          answer.push('\n');
-          answer.push(`<li>${newArr[idx][index].split('.')[1]}</li>`);
-          answer.push('\n\n');
-        }
       });
     });
 
@@ -90,7 +86,7 @@ class Converter {
   }
 
   convert(file) {
-    var lineReader = render.createInterface({
+    var lineReader = reader.createInterface({
       input: fs.createReadStream(file),
     });
 

@@ -18,9 +18,10 @@ Jeff
 ### Modules
 
 #### `modulename.js`
-
+index.js
 ##### Exported Values and Methods
-
+fileFunc -> creates loop.js and passes through function
+fileWriter -> takes txt input and outputs html
 
 ### Setup
 #### `.env` requirements

@@ -72,7 +72,7 @@ let fileWriter = (file) => {
   });
  
   lineReader.on('close', () => {
-    fs.writeFile('./files/index.html', answerArray, (err, data) => {
+    fs.writeFile('./files/index.html', answerArray.join(' '), (err, data) => {
       console.log('start live-server, file is there!');
     });
   });
